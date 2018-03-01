@@ -7,8 +7,6 @@ import { StackNavigator,TabNavigator } from "react-navigation"
 import {colors} from "../Tools/colors"
 import UserLoginPage from "./Account/UserLoginPage"
 
-import HomeFunPage from "./Home/HomeFunPage"
-
 const APPStyle = StyleSheet.create({
     navigaTitle:{
         color:"white",
@@ -24,6 +22,8 @@ SmartNavigater = (config,options)=>{
         navigationOptions:{
             headerStyle:APPStyle.navigaHeader,
             headerTitleStyle:APPStyle.navigaTitle,
+            headerBackTitle:null,
+            headerBackImage:require("../../images/Home/home.png"),
             ...options.navigationOptions
         }
     })
@@ -108,6 +108,14 @@ export const APPLoginRouter = SmartNavigater({
         screen:UserLoginPage,
         navigationOptions:{
             title:"登入",
+        }
+    },
+    register:{
+        getScreen:()=>{
+            return require("./Account/UserRegisterPage").default
+        },
+        navigationOptions:{
+            title:"注册"
         }
     }
 },{});
