@@ -23,7 +23,6 @@ SmartNavigater = (config,options)=>{
             headerStyle:APPStyle.navigaHeader,
             headerTitleStyle:APPStyle.navigaTitle,
             headerBackTitle:null,
-            headerBackImage:require("../../images/Home/home.png"),
             ...options.navigationOptions
         }
     })
@@ -119,3 +118,4 @@ export const APPLoginRouter = SmartNavigater({
         }
     }
 },{});
+

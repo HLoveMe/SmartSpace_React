@@ -16,7 +16,7 @@ import {colors} from "../../Tools/colors"
 export default class UserRegisterPage extends Component{
     constructor(props) {
         super(props);
-
+        console.log(this.props,this.props.navigation.getParam("name"))
     }
     render(){
         return (<View></View>)

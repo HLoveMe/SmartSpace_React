@@ -17,9 +17,12 @@ import {InterceptorManager} from "./Source/Tools/NetWork/Interceptor"
 import {AutoAuthorization} from "./Source/Tools/Smart_Network/AuthInterceptor"
 import {ResponseResultActionManager} from "./Source/Tools/NetWork/ResponseResultAction"
 import {UserPowerLostAction,ResulstMessageAction,NetworkResultAction} from "./Source/Tools/Smart_Network/ResultHandleAction"
-import Store  from "./Source/ReduxReact/APPReducers"
+// import Store  from "./Source/ReduxReact/APPReducers"
 import { Provider } from 'react-redux'
 class BlankPage extends Component{render() {return (<View></View>)}}
+// ReduxLoginNavigation
+import {ReduxLoginNavigation} from "./Source/ReduxReact_Navigator/navigator/ReduxLoginNavigation"
+import Store from "./Source/ReduxReact_Navigator/APPReducers"
 export default class SmartSpaceR extends Component {
     constructor(props) {
         super(props);
@@ -32,11 +35,12 @@ export default class SmartSpaceR extends Component {
         UserInfoManager.userSubject.subscribe((user)=>{
             if(user == "Init"){return;}
             if(user == null){
-                this.setState({page:APPLoginRouter})
+                this.setState({page:ReduxLoginNavigation})
             }else{
                 this.setState({page:APPTabNavRouter})
             }
         });
+        console.log(Store)
     }
     //配置数据请求
     configNetWork(){
@@ -61,6 +65,5 @@ export default class SmartSpaceR extends Component {
 }
 
 AppRegistry.registerComponent('SmartSpaceR', () => SmartSpaceR);
-
 
 

@@ -11,6 +11,7 @@ import {MessageInputView} from "./views/MessageInputView"
 import Button from 'apsl-react-native-button'
 import PXHandle from "../../Tools/PXHandle"
 import {colors} from "../../Tools/colors"
+import {Types} from "../../ReduxReact_Navigator/AppTypes"
 
 const loginStyles = StyleSheet.create({
    loginPage:{
@@ -79,7 +80,8 @@ export default class UserLoginPage extends Component{
                     <Text style={[loginStyles.loginDescLabel,{textAlign:"right",right:0}]}>
                         还没注册?
                         <Text style={{color:colors.navbar}} onPress={()=>{
-                            this.props.navigation.navigate("register")
+                            {/*this.props.navigation.navigate("register",{"name":12345});*/}
+                            this.props.navigation.dispatch({type:Types.AccountTypes.register})
                         }}>点击注册</Text>
                     </Text>
                 </View>
