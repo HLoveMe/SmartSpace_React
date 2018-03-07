@@ -8,25 +8,40 @@ import {
     AppRegistry,
     StyleSheet,
     Text,
-    View
+    View,
+    ActivityIndicator,
+    ActivityIndicatorIOS,
+    ProgressBarAndroid,
+    Dimensions
 } from 'react-native';
 import { UserInfoManager } from "./Source/Pages/Account/UserInfoManager";
 import { APPLoginRouter,APPTabNavRouter } from "./Source/Pages/AppRouter"
+
 import {initStorage} from "./Source/Tools/DataBase"
 import {InterceptorManager} from "./Source/Tools/NetWork/Interceptor"
 import {AutoAuthorization} from "./Source/Tools/Smart_Network/AuthInterceptor"
+import {AutoURLStringization} from "./Source/Tools/Smart_Network/URLStringInterceptor"
 import {ResponseResultActionManager} from "./Source/Tools/NetWork/ResponseResultAction"
 import {UserPowerLostAction,ResulstMessageAction,NetworkResultAction} from "./Source/Tools/Smart_Network/ResultHandleAction"
-import Store  from "./Source/ReduxReact/APPReducers"
+import Store,{SagaWare}  from "./Source/ReduxReact/APPReducers"
+import RootSaga from "./Source/Sagas/sagas"
 import { Provider } from 'react-redux'
+import watch from 'redux-watch'
+import {Types} from "./Source/ReduxReact/AppTypes"
+import LoadingSpinnerOverlay from 'react-native-smart-loading-spinner-overlay'
+import Toast, {DURATION} from 'react-native-easy-toast'
 class BlankPage extends Component{render() {return (<View></View>)}}
 export default class SmartSpaceR extends Component {
+    partModalLoadingSpinnerOverLay = null;
+    toast = null;
     constructor(props) {
         super(props);
         this.state = {page:BlankPage};
     }
     componentDidMount(){
+        SagaWare.run(RootSaga);
         initStorage();
+        this.messageHandle();
         this.configNetWork();
         UserInfoManager.loadLocationData();
         UserInfoManager.userSubject.subscribe((user)=>{
@@ -37,9 +52,47 @@ export default class SmartSpaceR extends Component {
                 this.setState({page:APPTabNavRouter})
             }
         });
+
+    }
+    messageHandle(){
+        let content = "";
+        Store.subscribe(watch(Store.getState,"MessageReducer.showMessageInfo")((_new,old,path)=>{
+            console.log("显示提示框",_new,this.partModalLoadingSpinnerOverLay);
+            if(_new.content == content){return}
+            content = _new.content;
+            this.partModalLoadingSpinnerOverLay.hide({delay:0,duration:0});
+            this.toast.close();
+            switch (_new.type){
+                case Types.MessageType.loadingMessage:
+                    //显示菊花
+                    this.partModalLoadingSpinnerOverLay.show({
+                        delay:0,
+                        ..._new,
+                        duration:_new.duration == -1 ? 255 : _new.duration
+                    });
+                    break;
+                case Types.MessageType.textMessage:
+                    this.toast.show(_new.content,_new.duration == -1 ? DURATION.FOREVER : _new.duration * 1000);
+                    break;
+                case Types.MessageType.loadTextMessage:
+                    //显示菊花和文字
+
+                    break;
+                default:
+                    break
+            }
+
+        }));
+        //
+        Store.subscribe(watch(Store.getState,"MessageReducer.hiddenMessageInfo")((_new,old,path)=>{
+            console.log("移除提示框",_new);
+            this.partModalLoadingSpinnerOverLay.hide({delay:0,duration:0});
+            this.toast.close();
+        }))
     }
     //配置数据请求
     configNetWork(){
+        InterceptorManager.addInterceptor(new AutoURLStringization("http://192.168.40.232/apiv1/"));
         InterceptorManager.addInterceptor(AutoAuthorization);
         ResponseResultActionManager.addAction(new UserPowerLostAction(()=>{
             //登入有效性丢失
@@ -54,13 +107,26 @@ export default class SmartSpaceR extends Component {
     render() {
         return (
             <Provider store={Store}>
-                <this.state.page></this.state.page>
+                <View style={{flex:1}}>
+                    <this.state.page onNavigationStateChange = {(prevState, newState, action)=>{
+                        console.log(1111111)
+                    }}>
+                    </this.state.page>
+                    <LoadingSpinnerOverlay
+                        ref={ component => this.partModalLoadingSpinnerOverLay = component }
+                        modal={true}
+                        marginTop={64}/>
+                    <Toast ref={(toast)=>this.toast = toast}/>
+
+                </View>
             </Provider>
         )
     }
 }
-
-AppRegistry.registerComponent('SmartSpaceR', () => SmartSpaceR);
+import { Platform } from "react-native"
+const  uriPrefix = Platform.OS == "android" ? "smartSpace://smartSpace/" : "smartSpace://";
+const  App = ()=><SmartSpaceR uriPrefix={uriPrefix} />;
+AppRegistry.registerComponent('SmartSpaceR', () => App);
 
 
 
