@@ -2,9 +2,6 @@
  * Created by zhuzihao on 2018/3/5.
  */
 
-
-
-
 export const  MessageType = {
     loadingMessage:"loadingMessage", //只有loading
     textMessage:"textMessage",//只有文字

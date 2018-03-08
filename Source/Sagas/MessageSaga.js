@@ -19,7 +19,8 @@ export function* MessageSage() {
                 type:action.type,
                 count:conunt,
                 content:action.content,
-                duration:action.duration || 0.75
+                duration:action.duration || 0.75,
+                important:action.important || false
             }
         })
     }

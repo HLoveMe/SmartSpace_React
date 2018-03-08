@@ -34,6 +34,7 @@ class BlankPage extends Component{render() {return (<View></View>)}}
 export default class SmartSpaceR extends Component {
     partModalLoadingSpinnerOverLay = null;
     toast = null;
+    user = null;
     constructor(props) {
         super(props);
         this.state = {page:BlankPage};
@@ -49,14 +50,20 @@ export default class SmartSpaceR extends Component {
             if(user == null){
                 this.setState({page:APPLoginRouter})
             }else{
-                this.setState({page:APPTabNavRouter})
+                //多次发生
+                if(this.user==null){
+                    this.setState({page:APPTabNavRouter});
+                }
+                this.user = user;
             }
         });
 
     }
     messageHandle(){
         let content = "";
+        let important = false;
         Store.subscribe(watch(Store.getState,"MessageReducer.showMessageInfo")((_new,old,path)=>{
+            if(_new.important)
             console.log("显示提示框",_new,this.partModalLoadingSpinnerOverLay);
             if(_new.content == content){return}
             content = _new.content;
@@ -76,12 +83,16 @@ export default class SmartSpaceR extends Component {
                     break;
                 case Types.MessageType.loadTextMessage:
                     //显示菊花和文字
-
+                    //暂时不显示文字
+                    this.partModalLoadingSpinnerOverLay.show({
+                        delay:0,
+                        ..._new,
+                        duration:255
+                    });
                     break;
                 default:
                     break
             }
-
         }));
         //
         Store.subscribe(watch(Store.getState,"MessageReducer.hiddenMessageInfo")((_new,old,path)=>{
@@ -101,6 +112,10 @@ export default class SmartSpaceR extends Component {
         ResponseResultActionManager.addAction(new ResulstMessageAction((message)=>{
             //请求失败
             console.log("请求数据没得到");
+            Store.dispatch({
+                type:Types.MessageType.textMessage,
+                content:message
+            })
         }));
         ResponseResultActionManager.addAction(new NetworkResultAction());
     }

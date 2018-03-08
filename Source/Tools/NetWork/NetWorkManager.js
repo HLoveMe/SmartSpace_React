@@ -16,7 +16,7 @@ export class NetWorkManager {
      *
      *  url   string
      *  method HttpMethod
-     *  return  Observable
+     *  return  Observable ResponseResult
      * */
     static  NetWork(url,method,body,header){
         return Observable.create((obs)=>{

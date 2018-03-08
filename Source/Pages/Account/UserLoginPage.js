@@ -87,7 +87,7 @@ export default class UserLoginPage extends Component{
                         onPress={()=>{
                             let state = Store.getState();
                             let account = state.AccountReducer.Account || "";
-                            let password = state.AccountReducer.PassWord || "";
+                            let password = state.AccountReducer.Password || "";
                             if(account.length == 0 || password.length == 0){
                                 Store.dispatch({
                                     type:Types.MessageType.textMessage,

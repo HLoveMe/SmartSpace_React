@@ -12,14 +12,13 @@ import {MessageType} from "./MessageType"
  count:conunt, option
  content:action.content,
  duration:
- delay:0 no use
+ important:bool 是否一定要等其显示完成  才能显下一个消息  如果多个important消息
  }
  */
 /**
  * MessageDismiss
  * type:
  * hiddenMessageInfo:{
- *  delay:0
  * }
  *
  * */

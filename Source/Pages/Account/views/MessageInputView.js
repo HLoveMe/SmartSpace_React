@@ -80,10 +80,10 @@ export class MessageInputView extends Component{
     _pushCode=()=>{
         let iphone  = Store.getState().AccountReducer.iphone;
         if( iphone && iphone.length>=1){
-            NetWorkManager.POST("sys/send-code",{mobile:iphone,type:1}).subscribe((res)=>{
-                if(res.ok){
-
-                }
+            Store.dispatch({
+                type:Types.AccountTypes.getCode,
+                codeType:1,
+                iphone:iphone
             });
             this.setState({isDisabled:true});
             const section = 59;

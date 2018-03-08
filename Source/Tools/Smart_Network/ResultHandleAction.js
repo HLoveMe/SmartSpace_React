@@ -39,7 +39,7 @@ export class  ResulstMessageAction extends  ResponseResultAction{
         return false;
     }
     action(ResponseResult){
-        return {ResponseResult,...{error:new Error("请求失败")}};
+        return {ResponseResult,...{error:"请求失败"+ResponseResult.result.res_msg}};
     }
 }
 

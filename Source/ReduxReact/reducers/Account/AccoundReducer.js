@@ -22,7 +22,11 @@ export function AccountReducer(state={},action) {
         case AccountTypes.login:
             return state;
         case AccountTypes.getCode:
-            return {...state,...action};
+            return state;
+        case AccountTypes.register:
+            return state;
+        case AccountTypes.outLogin:
+            return state;
         default:
             return state;
     }

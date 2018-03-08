@@ -16,7 +16,7 @@ import PXHandle from "../../Tools/PXHandle"
 import {colors} from "../../Tools/colors"
 import Store from "../../ReduxReact/APPReducers"
 import {Types} from "../../ReduxReact/AppTypes"
-import {NetWorkManager} from "../../Tools/NetWork/NetWorkManager"
+import {UserInfoManager} from "./UserInfoManager"
 const styles = StyleSheet.create({
     container:{
         flex:1,
@@ -41,13 +41,24 @@ export default class UserRegisterNextPage extends Component{
     };
     constructor(props) {
         super(props);
+
     }
 
     _registerUser = ()=>{
         console.log('_registerUser')
         let state = Store.getState();
         console.log(state.AccountReducer);
-
+        if(state.AccountReducer.setPassword == state.AccountReducer.reSetPassword){
+            Store.dispatch({
+                type:Types.AccountTypes.register,
+                ...state.AccountReducer
+            });
+            return
+        }
+        Store.dispatch({
+            type:Types.MessageType.textMessage,
+            content:"两次秘密不一致"
+        })
     };
     componentWillUnmount(){
         Store.dispatch({
