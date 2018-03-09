@@ -11,12 +11,17 @@ import {createStore,applyMiddleware,combineReducers} from "redux"
  * */
 import {AccountReducer} from "./reducers/Account/AccoundReducer"
 import {MessageReducer} from "./reducers/Message/MessageReducer"
+import {HomeReducer} from "./reducers/Home/HomeReducer"
+import {GroupReducer} from "./reducers/Group/GroupReducer"
+import {USerReducer} from "./reducers/App/USerReducer"
  function APPReducers(state={},action) {
     //进行差分
     return {
         AccountReducer:AccountReducer(state.AccountReducer,action),
-        HomeReducer:{},
-        MessageReducer:MessageReducer(state.MessageReducer,action)
+        HomeReducer:HomeReducer(state.HomeReducer,action),
+        MessageReducer:MessageReducer(state.MessageReducer,action),
+        GroupReducer:GroupReducer(state.GroupReducer,action),
+        USerReducer:USerReducer(state.USerReducer,action),
     }
 };
 

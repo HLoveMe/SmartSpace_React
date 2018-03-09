@@ -1,5 +1,5 @@
 
-import { BehaviorSubject ,Observable} from 'rxjs/Rx';
+import {Observable,BehaviorSubject} from 'rxjs/Rx';
 import {NetWorkManager} from "../../Tools/NetWork/NetWorkManager"
 export class UserInfo{
     user_id = 0;

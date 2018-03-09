@@ -2,9 +2,9 @@
  * Created by zhuzihao on 2018/3/5.
  */
 import { take,fork,put,call} from 'redux-saga/effects';
-import {Types} from "../ReduxReact/AppTypes"
-import {NetWorkManager} from "../Tools/NetWork/NetWorkManager"
-import {UserInfoManager} from "../Pages/Account/UserInfoManager"
+import {Types} from "../../ReduxReact/AppTypes"
+import {NetWorkManager} from "../../Tools/NetWork/NetWorkManager"
+import {UserInfoManager} from "../../Pages/Account/UserInfoManager"
 
 
 function * UserRegister(action){

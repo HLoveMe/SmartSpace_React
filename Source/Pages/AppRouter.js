@@ -24,7 +24,9 @@ const APPStyle = StyleSheet.create({
 
 SmartNavigater = (config,options)=>{
     let _Navi= StackNavigator(config,{
-        navigationOptions:({navigation,screenProps,navigationOptions})=>{
+        navigationOptions:({navigation})=>{
+            let key = navigation.state.key;
+            let tabBarVisible = parseInt(key.split("-").pop()) < 4;
             return {
                 headerStyle:APPStyle.navigaHeader,
                 headerTitleStyle:APPStyle.navigaTitle,
@@ -34,7 +36,8 @@ SmartNavigater = (config,options)=>{
                         <Image source={require('../../images/Home/back-icon.png')} style={{width: 20, height: 20, resizeMode: 'contain'}} />
                     </TouchableOpacity>
                 </View>),
-                ...options.navigationOptions
+                ...options.navigationOptions,
+                tabBarVisible
             }
         }
     });
@@ -43,9 +46,6 @@ SmartNavigater = (config,options)=>{
         if(action.type == NavigationActions.BACK){
             Store.dispatch({
                 type:Types.MessageType.MessageDismiss,
-                hiddenMessageInfo:{
-                    delay:0
-                }
             })
         }
         return defaultGetStateForAction(action,state);
@@ -84,6 +84,10 @@ export const APPTabNavRouter = TabNavigator({
                 navigationOptions:{
                     headerLeft:null
                 }
+            },
+            groupbox:{
+                getScreen:()=>{return require("./Group/DistributionGroupBoxPage").default},
+                path:"boxs/",
             }
         },{
             navigationOptions:{

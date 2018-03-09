@@ -52,13 +52,26 @@ export default class SmartSpaceR extends Component {
             }else{
                 //多次发生
                 if(this.user==null){
-                    this.setState({page:APPTabNavRouter});
+                    this.setState({page:APPTabNavRouter},()=>{
+                        this.loadAppShouldData();
+                    });
                 }
                 this.user = user;
             }
         });
-
     }
+    //npm uninstall react-native-item-cell
+    //加载APP必要数据
+    loadAppShouldData = ()=>{
+        //更新数据
+        Store.dispatch({
+            type:Types.HomeTypes.MainDataUpdate
+        });
+        //更新数据
+        Store.dispatch({
+            type:Types.GroupType.UpdateGroupData
+        });
+    };
     messageHandle(){
         let content = "";
         let important = false;
@@ -75,7 +88,7 @@ export default class SmartSpaceR extends Component {
                     this.partModalLoadingSpinnerOverLay.show({
                         delay:0,
                         ..._new,
-                        duration:_new.duration == -1 ? 255 : _new.duration
+                        duration:(_new.duration == -1 || _new.duration == null) ? 255 : _new.duration
                     });
                     break;
                 case Types.MessageType.textMessage:
@@ -124,7 +137,7 @@ export default class SmartSpaceR extends Component {
             <Provider store={Store}>
                 <View style={{flex:1}}>
                     <this.state.page onNavigationStateChange = {(prevState, newState, action)=>{
-                        console.log(1111111)
+                        console.log("进行导航")
                     }}>
                     </this.state.page>
                     <LoadingSpinnerOverlay
