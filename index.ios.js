@@ -17,6 +17,7 @@ import {
 import { UserInfoManager } from "./Source/Pages/Account/UserInfoManager";
 import { APPLoginRouter,APPTabNavRouter } from "./Source/Pages/AppRouter"
 import ElectricityBoxManager from "./Source/Pages/Group/ElectricityBoxManager"
+import MainDataManager from "./Source/Pages/Home/MainDataManager"
 import {initStorage} from "./Source/Tools/DataBase"
 import {InterceptorManager} from "./Source/Tools/NetWork/Interceptor"
 import {AutoAuthorization} from "./Source/Tools/Smart_Network/AuthInterceptor"

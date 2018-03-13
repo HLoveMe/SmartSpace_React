@@ -45,7 +45,7 @@ export class USerInfoView extends Component{
         return (
             <View {...this.props}>
                 <View style={style.iconC}>
-                    <Image style={style.icon} source={{uri:this.state.user.headimgurl}}>
+                    <Image style={style.icon} source={{uri:this.state.user.headimgurl.replace("243","232")}}>
 
                     </Image>
                 </View>

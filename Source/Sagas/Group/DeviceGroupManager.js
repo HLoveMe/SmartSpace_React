@@ -85,28 +85,30 @@ function *removeDeviceGroup(id) {
 
 export function *DeviceGroupOperation() {
     while (true){
-        let action = yield take([Types.GroupType.removeGroup,Types.GroupType.oneGroupDetail]);
+        let action = yield take([Types.GroupType.removeGroup,Types.GroupType.oneGroupDetail,Types.GroupType.createGroup]);
         switch (action.type){
             case Types.GroupType.removeGroup:
-                yield put({
-                    type:Types.MessageType.loadingMessage,
-                    content:"删除中。。。"
-                });
-                let state = yield removeDeviceGroup(action.re_group.id);
-                yield put({
-                    type:Types.MessageType.textMessage,
-                    content:state ? "删除成功" : "删除失败",
-                    duration:0.75
-                });
-                yield put({
-                    type:Types.GroupType.removeGroup,
-                    removeGroupState:{
-                        state:state,
-                        group:action.re_group,
-                        index:action.index
-                    }
-                });
-                break;
+                try{
+                    yield put({
+                        type:Types.MessageType.loadingMessage,
+                        content:"删除中。。。"
+                    });
+                    let state = yield NetWorkManager.POST("group/del-group",{id:action.re_group.id}).toPromise()
+                    yield put({
+                        type:Types.MessageType.textMessage,
+                        content:state.success ? "删除成功" : "删除失败",
+                        duration:0.75
+                    });
+                    yield put({
+                        type:Types.GroupType.UpdateGroupData,
+                    });
+                    yield put({
+                        type:Types.GroupType.getGroupData,
+                    })
+                    break;
+                }catch (err){
+                    console.log("移除组",err)
+                }
             case Types.GroupType.oneGroupDetail:
                 try{
                     let worker = yield NetWorkManager.GET("group/group-info",{id:action.id}).toPromise()
@@ -126,8 +128,28 @@ export function *DeviceGroupOperation() {
                 }catch (err){
                     console.log("得到组信息错误2",err)
                 }
-
-                break
+                break;
+            case Types.GroupType.createGroup:
+                try{
+                    yield put({
+                        type:Types.MessageType.loadingMessage,
+                        content:"创建中。。。"
+                    });
+                    let result = yield NetWorkManager.POST("group/add-group",{...action}).toPromise();
+                    yield put({
+                        type:Types.MessageType.textMessage,
+                        content:result.success ? "创建成功" : "创建失败"
+                    })
+                    yield put({
+                        type:Types.GroupType.createGroup,
+                        createGroupResult:{
+                            info:result
+                        }
+                    })
+                }catch (err){
+                    console.log("创建组 失败")
+                }
+                break;
             default:
                 break;
         }

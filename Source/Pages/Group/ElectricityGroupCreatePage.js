@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
 export default class ElectricityGroupCreatePage extends PureComponent{
     unsub = null;
     unbox = null;
+    uncreate = null;
     static navigationOptions = ({navigation})=> {
         return{
             title:navigation.state.group  == null ? "新建配电箱组" : "设置设备组",
@@ -75,29 +76,30 @@ export default class ElectricityGroupCreatePage extends PureComponent{
             this.unsub = Store.subscribe(watch(Store.getState,"GroupReducer.oneGroupDetail")((_new)=>{
                 this.setState({editGroupInfo:_new.editGroupInfo});
                 this.setState({selects:_new.editGroupInfo.equipment_in});
-                /**
-                 * equipment_in:[]
-                 equipment_out:[]
-                 group_name:"BBBBB"
-                 id:""
-                 *
-                 *
-                 *
-                 {
-                    equipment_id:
-                    is_default:
-                    name:"设备6"
-                 }
-                 */
-                console.log(_new)
             }))
         }
         this.unbox =  ElectricityBoxMananger.infoSubject.subscribe((boxs)=>{
             this.setState({boxs})
         })
+        this.uncreate = Store.subscribe(watch(Store.getState,"GroupReducer.createGroupResult")((_new)=>{
+            let info = _new.info;
+            if(info.success){
+                setTimeout(()=>{
+                    Store.dispatch({
+                        type:Types.GroupType.getGroupData
+                    });
+                    Store.dispatch({
+                        type:Types.GroupType.UpdateGroupData
+                    });
+                    this.props.navigation.goBack();
+                },750)
+            }
+        }))
+
     }
     componentWillUnmount(){
         this.unsub && this.unsub();
+        this.uncreate && this.uncreate();
         this.unbox && this.unbox.unsubscribe();
     }
     _sureCreateGroup = ()=>{
@@ -111,6 +113,13 @@ export default class ElectricityGroupCreatePage extends PureComponent{
         }
         if(this.state.group == null){
             //创建
+            Store.dispatch({
+                type:Types.GroupType.createGroup,
+                group_name:this.state.name,
+                equipment_ids:this.state.selects.map((V)=>{
+                    return V.equipment_id
+                })
+            })
         }else{
             //修改
         }

@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import PXHandle from "../../../Tools/PXHandle"
 import {colors} from "../../../Tools/colors"
 import {connect} from "react-redux"
+import fecha from "fecha"
 
 const styles = StyleSheet.create({
     titleLabel:{
@@ -72,26 +73,47 @@ const styles = StyleSheet.create({
 class _ElectricityDistributionView extends Component{
     constructor(props) {
         super(props);
-        console.log(this.props.style)
+        console.log(props)
+
     }
+    _content = (index)=>{
+        let model =  this.props.data
+        switch (index){
+            case 0:
+                return model.pressure + "V";
+            case 1:
+                return model.electric + "A";
+            case 2:
+                return (model.pressure * model.electric) + "W";
+            case 3:
+                return model.temperature + "℃";
+            case 4:
+                return model.lostElectric + "A"
+            case 5:
+                return "￥" + model.today * model.price
+            default:
+                return ""
+        }
+    };
     render(){
+        let model = this.props.data;
         return (
             <View {...this.props} style={{position:"relative",backgroundColor:colors.navbar}}>
-                <Text style={styles.titleLabel}>NAME</Text>
+                <Text style={styles.titleLabel}>{model.title}</Text>
                 <Text style={styles.yes_today_Label}>
-                    昨日电费:$ 0.0
+                    昨日电费:￥{model.yesterday * model.price}
                 </Text>
                 <Text style={styles.yes_today_Label}>
-                    今日电费:$ 0.0
+                    今日电费:￥{model.today * model.price}
                 </Text>
                 <View style={styles.chartView}>
 
                 </View>
                 <View style={styles.descView}>
                     {
-                        [[["电压","pressure"],["电流","electric"]],
-                            [["功率","lg"],["温度","temperature"]],
-                            [["漏电","lostElectric"],["电费","df"]]].map((value,index)=>{
+                        [["电压","电流"],
+                            ["功率","温度"],
+                            ["漏电","电费"]].map((value,index)=>{
                             return (
                                 <View key={index} style={styles.descViewGroup}>
                                     {
@@ -101,12 +123,12 @@ class _ElectricityDistributionView extends Component{
                                             return (
                                                 <View key={_index} style={styles.descViewPart}>
                                                     <View style={styles.descViewPartLeft}>
-                                                        <Text style={{color:"white",fontSize:14}}>{_value[0]}</Text>
+                                                        <Text style={{color:"white",fontSize:14}}>{_value}</Text>
                                                     </View>
                                                     <View style={styles.descViewPartRight}>
                                                         <Text style={{color:"white",fontSize:20}}>
                                                             {
-                                                                (index * 2) + _index
+                                                                this._content((index * 2) + _index)
                                                             }
                                                             </Text>
                                                     </View>
@@ -118,7 +140,7 @@ class _ElectricityDistributionView extends Component{
                             )
                         })
                     }
-                    <Text style={styles.descViewUpdate}>数据刷新时间:2018.1.2 08:12</Text>
+                    <Text style={styles.descViewUpdate}>数据刷新时间:{fecha.format(model.time,"YYYY-MM-DD hh:mm")}</Text>
                 </View>
             </View>
         )
@@ -126,11 +148,13 @@ class _ElectricityDistributionView extends Component{
 }
 
 _ElectricityDistributionView.propTypes = {
-    height:PropTypes.number.isRequired
+    height:PropTypes.number.isRequired,
+    data:PropTypes.any.isRequired,
 };
 
 const mapStateToProps =(state,props)=>{
-    return {}
+    console.log(state,props)
+    return {...props,A:111}
 };
 
 export default ElectricityDistributionView = connect(mapStateToProps)(_ElectricityDistributionView)

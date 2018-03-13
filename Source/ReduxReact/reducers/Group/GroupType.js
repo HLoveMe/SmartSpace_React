@@ -8,4 +8,5 @@ export const GroupType = {
     getGroupData:"getGroupData",//得到分组信息
     removeGroup:"removeGroup",//移除分组
     oneGroupDetail:"oneGroupDetail",//得到某个组的详细信息
+    createGroup:"createGroup",//创建组
 };

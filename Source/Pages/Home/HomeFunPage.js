@@ -13,7 +13,9 @@ import ElectricityDistributionView from "./views/ElectricityDistributionView"
 import {MainFunView} from "./views/MainFunView"
 import Store from "../../ReduxReact/APPReducers"
 import {Types} from "../../ReduxReact/AppTypes"
-import watch from 'redux-watch'
+import MainDataManager from "./MainDataManager"
+import ElectricityBoxManager from "../Group/ElectricityBoxManager"
+import {MainElectryInfo} from "./models/MainElectryInfo"
 import {Observable} from "rxjs/Rx"
 const styles = StyleSheet.create({
     page:{flex:1},
@@ -28,18 +30,22 @@ export default class HomeFunPage extends Component{
     };
     constructor(props) {
         super(props);
-        // 第一次数据加载在index.ios.js
-        Store.subscribe(watch(Store.getState,"HomeReducer.MainData")((_new)=>{
-            console.log(_new);
-
-            this._updateUI(_new);
-        }));
-        this.startUpdate();
+        this.state = {data:new MainElectryInfo(null,null,null)}
     }
-    _updateUI = (data)=>{
 
-    };
     componentDidMount(){
+        this.startUpdate();
+        //首页数据  MainDevideData
+        let mainObs = MainDataManager.dataSubject.asObservable();
+        //默认数据  {equipment_id:6,is_default:1,name:"设备6"
+        let current = ElectricityBoxMananger.currentSubject.asObservable();
+        //
+        let mqtt = Observable.of(null);
+        mainObs.combineLatest(current,mqtt,(main,devide,mqtt)=>{
+            return new MainElectryInfo(main,devide,mqtt)
+        }).subscribe((data)=>{
+            this.setState({data})
+        })
     }
 
     //更新数据首页
@@ -58,7 +64,7 @@ export default class HomeFunPage extends Component{
     render(){
         return (
             <View style={styles.page}>
-                <ElectricityDistributionView style={styles.distribution} height={PXHandle.PXHeight(359)}>
+                <ElectricityDistributionView data = {this.state.data} style={styles.distribution} height={PXHandle.PXHeight(359)}>
 
                 </ElectricityDistributionView>
                 <MainFunView height={PXHandle.PXHeight(195)}>
@@ -68,3 +74,50 @@ export default class HomeFunPage extends Component{
         )
     }
 }
+
+/**
+ *
+ history
+ :
+ (24) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+ id
+ :
+ 6
+ is_primary
+ :
+ 1
+ meter_fee
+ :
+ {peak: {…}, normal: {…}, valley: {…}}
+ name
+ :
+ "MT419B5B56"
+ price
+ :
+ 2
+ serial_number
+ :
+ "MT419B5B56"
+ status
+ :
+ {power: 0, temp: 28, meterd: 0.000203, leakage: 0, meterm: 0.000203, …}
+ today_fee
+ :
+ 0
+ yesterday_fee
+ :
+ 0
+ * */
+
+/**
+ * equipment_id
+ :
+ 6
+ is_default
+ :
+ 1
+ name
+ :
+ "设备6"
+ *
+ * */

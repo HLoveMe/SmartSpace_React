@@ -17,6 +17,8 @@ export function GroupReducer(state={},action) {
             return {...state,...action};
         case GroupType.oneGroupDetail:
             return {...state,...action};
+        case GroupType.createGroup:
+            return {...state,...action}
         default:
             return state;
     }

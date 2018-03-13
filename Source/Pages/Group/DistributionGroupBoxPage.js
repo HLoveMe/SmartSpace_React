@@ -47,9 +47,11 @@ export default class DistributionGroupBoxPage extends PureComponent{
         console.log(this.props.navigation)
     }
     componentDidMount(){
-        Store.dispatch({type:Types.GroupType.getGroupData});
         this.unsubscribe = ElectricityBoxManager.groupSubject.subscribe((datas)=>{
-          this.setState({datas})
+            if(datas==null || datas.length == 0){
+                Store.dispatch({type:Types.GroupType.getGroupData});
+            }
+            this.setState({datas})
         })
     }
     componentWillUnmount(){
