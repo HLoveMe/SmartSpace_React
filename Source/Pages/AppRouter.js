@@ -88,6 +88,12 @@ export const APPTabNavRouter = TabNavigator({
             groupbox:{
                 getScreen:()=>{return require("./Group/DistributionGroupBoxPage").default},
                 path:"boxs/",
+            },
+            newgroup:{
+                getScreen:()=>{return require("./Group/ElectricityGroupCreatePage").default}
+            },
+            groupaddbox:{
+                getScreen:()=>{return require("./Group/GroupAddBoxPage").default}
             }
         },{
             navigationOptions:{
@@ -132,6 +138,9 @@ export const APPTabNavRouter = TabNavigator({
                 navigationOptions:{
                     headerLeft:null
                 }
+            },
+            appSetting:{
+                getScreen:()=>{return require("./AppConfig/Settings/SettingViewPage").default}
             }
         },{
             navigationOptions:{

@@ -4,14 +4,21 @@
 
 import { GroupType } from "./GroupType"
 
+
+
+
 export function GroupReducer(state={},action) {
     switch (action.type){
         case GroupType.UpdateGroupData:
             return {...state,...action};
         case GroupType.getGroupData:
             return {...state,...action};
+        case GroupType.removeGroup:
+            return {...state,...action};
+        case GroupType.oneGroupDetail:
+            return {...state,...action};
         default:
-            break
+            return state;
     }
-    return state
+    return state;
 }

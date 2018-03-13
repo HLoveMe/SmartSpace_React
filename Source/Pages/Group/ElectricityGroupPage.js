@@ -10,9 +10,11 @@ import {
 import {Types} from "../../ReduxReact/AppTypes"
 import PXHandle from "../../Tools/PXHandle"
 import {colors} from "../../Tools/colors"
-import watch from 'redux-watch'
-import Store from "../../ReduxReact/APPReducers"
+// import watch from 'redux-watch'
+// import Store from "../../ReduxReact/APPReducers"
 import ItemCell from 'react-native-item-cell'
+import ElectricityBoxManager from "./ElectricityBoxManager"
+
 const styles = StyleSheet.create({
    content:{
        flex:1,
@@ -47,16 +49,18 @@ export default class ElectricityGroupPage extends Component{
         }
     }
     _updateUI = (data)=>{
-        this.setState({...data})
-    }
+        this.setState({...data});
+    };
 
     componentDidMount(){
-        let data = Store.getState().GroupReducer.devideBox;
-        data && this._updateUI(data);
-        Store.subscribe(watch(Store.getState,"GroupReducer.devideBox")((_new)=>{
-            this._updateUI(_new);
-        }));
-
+        // let data = Store.getState().GroupReducer.devideBox;
+        // data && this._updateUI(data);
+        // Store.subscribe(watch(Store.getState,"GroupReducer.devideBox")((_new)=>{
+        //     this._updateUI(_new);
+        // }));
+        ElectricityBoxManager.infoSubject.subscribe((data)=>{
+            this._updateUI(data)
+        })
     }
     render(){
         return (

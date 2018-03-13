@@ -4,9 +4,10 @@
 
 import { fork } from 'redux-saga/effects';
 
-import {DeviceBoxManager,DeviceGroupManger} from "./DeviceGroupManager"
+import {DeviceBoxManager,DeviceGroupManger,DeviceGroupOperation} from "./DeviceGroupManager"
 
 export  function *GroupSaga() {
     yield fork(DeviceBoxManager);
-    yield fork(DeviceGroupManger)
+    yield fork(DeviceGroupManger);
+    yield fork(DeviceGroupOperation);
 }

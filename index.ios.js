@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import { UserInfoManager } from "./Source/Pages/Account/UserInfoManager";
 import { APPLoginRouter,APPTabNavRouter } from "./Source/Pages/AppRouter"
-
+import ElectricityBoxManager from "./Source/Pages/Group/ElectricityBoxManager"
 import {initStorage} from "./Source/Tools/DataBase"
 import {InterceptorManager} from "./Source/Tools/NetWork/Interceptor"
 import {AutoAuthorization} from "./Source/Tools/Smart_Network/AuthInterceptor"
@@ -74,11 +74,14 @@ export default class SmartSpaceR extends Component {
     };
     messageHandle(){
         let content = "";
-        let important = false;
+        let last  = new Date().getTime();
         Store.subscribe(watch(Store.getState,"MessageReducer.showMessageInfo")((_new,old,path)=>{
-            if(_new.important)
             console.log("显示提示框",_new,this.partModalLoadingSpinnerOverLay);
-            if(_new.content == content){return}
+            let newD = new Date().getTime();
+            if((newD - last < 1000)){
+                if(_new.content != content){}else {return}
+            }
+            last = newD;
             content = _new.content;
             this.partModalLoadingSpinnerOverLay.hide({delay:0,duration:0});
             this.toast.close();
