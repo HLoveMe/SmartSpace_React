@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View,Image ,TouchableOpacity,Text,FlatList,AlertIOS} from 'react-native';
 import { NativeModules,NativeEventEmitter} from 'react-native';
-const { ReactVCManager,ReactUserManager,ReactParamsManager } = NativeModules;
+const { AppParamsManager } = NativeModules;
 import Button from 'apsl-react-native-button'
 import PXHandle from "../../../Tools/PXHandle"
 const SettingStyle = StyleSheet.create({
@@ -54,8 +54,8 @@ export  default class SettingViewPage extends React.PureComponent{
     }
     constructor(ops){
         super(ops);
-        // let version = ReactParamsManager["CFBundleShortVersionString"];
-        let version = "12.121.12"
+        console.log(NativeModules);
+        let version = AppParamsManager["CFBundleShortVersionString"];
         this.list = [
             {
                 name:"修改密码",

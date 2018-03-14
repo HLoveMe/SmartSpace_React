@@ -12,6 +12,7 @@ import PXHandle from "../../../Tools/PXHandle"
 import {colors} from "../../../Tools/colors"
 import {connect} from "react-redux"
 import fecha from "fecha"
+import ChartView from "../../../Tools/Views/ChartView"
 
 const styles = StyleSheet.create({
     titleLabel:{
@@ -106,9 +107,9 @@ class _ElectricityDistributionView extends Component{
                 <Text style={styles.yes_today_Label}>
                     今日电费:￥{model.today * model.price}
                 </Text>
-                <View style={styles.chartView}>
+                <ChartView style={styles.chartView} data={this.props.data} type={1}>
 
-                </View>
+                </ChartView>
                 <View style={styles.descView}>
                     {
                         [["电压","电流"],
@@ -153,8 +154,7 @@ _ElectricityDistributionView.propTypes = {
 };
 
 const mapStateToProps =(state,props)=>{
-    console.log(state,props)
-    return {...props,A:111}
+    return {...props}
 };
 
 export default ElectricityDistributionView = connect(mapStateToProps)(_ElectricityDistributionView)

@@ -22,11 +22,13 @@ const APPStyle = StyleSheet.create({
 });
 
 
+let tabbarShowPage = "";
 SmartNavigater = (config,options)=>{
+    tabbarShowPage += Object.keys(config)[0] + "-";
     let _Navi= StackNavigator(config,{
         navigationOptions:({navigation})=>{
-            let key = navigation.state.key;
-            let tabBarVisible = parseInt(key.split("-").pop()) < 4;
+            let routeName = navigation.state.routeName;
+            let tabBarVisible = tabbarShowPage.indexOf(routeName)>=0;
             return {
                 headerStyle:APPStyle.navigaHeader,
                 headerTitleStyle:APPStyle.navigaTitle,

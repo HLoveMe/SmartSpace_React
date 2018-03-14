@@ -57,6 +57,13 @@
 		DB5D462420524B420004ADBA /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB5D45FA20524B420004ADBA /* EvilIcons.ttf */; };
 		DB5D462520524B420004ADBA /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB5D45FB20524B420004ADBA /* SimpleLineIcons.ttf */; };
 		DB5D462620524B420004ADBA /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB5D45FC20524B420004ADBA /* MaterialIcons.ttf */; };
+		DB90FE422058C61900306941 /* ChartDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = DB90FE412058C61900306941 /* ChartDataSet.m */; };
+		DB90FE452058C64500306941 /* ChartShowViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB90FE442058C64500306941 /* ChartShowViewManager.m */; };
+		DB90FE482058C67E00306941 /* AppParamsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB90FE472058C67E00306941 /* AppParamsManager.m */; };
+		DB90FE4C2058FB0400306941 /* RCTConvert+Charts.m in Sources */ = {isa = PBXBuildFile; fileRef = DB90FE4B2058FB0400306941 /* RCTConvert+Charts.m */; };
+		DB90FE532059026F00306941 /* ChartShowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB90FE522059026F00306941 /* ChartShowView.swift */; };
+		DB90FE5D205919E700306941 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB90FE5A205919D300306941 /* Charts.framework */; };
+		DB90FE5E205919E700306941 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB90FE5A205919D300306941 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DBA584583AD243B8BCF6636A /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70D894D5623444F4845BB107 /* Feather.ttf */; };
 		EBC90A8596A945979BB7755D /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E29AA4C8E14448C7997E9FE7 /* Zocial.ttf */; };
 		F37F7DEC05F54749BDF9523A /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B653B0A438B401B93331959 /* Octicons.ttf */; };
@@ -301,7 +308,42 @@
 			remoteGlobalIDString = ADD01A681E09402E00F6D226;
 			remoteInfo = "RCTBlob-tvOS";
 		};
+		DB90FE59205919D300306941 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB90FE54205919D300306941 /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65AD9E95D9ED4DC0BD73A743;
+			remoteInfo = Charts;
+		};
+		DB90FE5B205919D300306941 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB90FE54205919D300306941 /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1CBBC58C6CE1EBEE9852CE41;
+			remoteInfo = ChartsTests;
+		};
+		DB90FE5F205919E700306941 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB90FE54205919D300306941 /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A58A4ED274A941CA248EA921;
+			remoteInfo = Charts;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DB90FE3D2058C57E00306941 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DB90FE5E205919E700306941 /* Charts.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
@@ -351,6 +393,17 @@
 		DB5D45FA20524B420004ADBA /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
 		DB5D45FB20524B420004ADBA /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		DB5D45FC20524B420004ADBA /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
+		DB90FE402058C61900306941 /* ChartDataSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChartDataSet.h; sourceTree = "<group>"; };
+		DB90FE412058C61900306941 /* ChartDataSet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChartDataSet.m; sourceTree = "<group>"; };
+		DB90FE432058C64500306941 /* ChartShowViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChartShowViewManager.h; sourceTree = "<group>"; };
+		DB90FE442058C64500306941 /* ChartShowViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChartShowViewManager.m; sourceTree = "<group>"; };
+		DB90FE462058C67E00306941 /* AppParamsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppParamsManager.h; sourceTree = "<group>"; };
+		DB90FE472058C67E00306941 /* AppParamsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppParamsManager.m; sourceTree = "<group>"; };
+		DB90FE4A2058FB0400306941 /* RCTConvert+Charts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RCTConvert+Charts.h"; sourceTree = "<group>"; };
+		DB90FE4B2058FB0400306941 /* RCTConvert+Charts.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "RCTConvert+Charts.m"; sourceTree = "<group>"; };
+		DB90FE4F2059019800306941 /* SmartSpaceR-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SmartSpaceR-Bridging-Header.h"; sourceTree = "<group>"; };
+		DB90FE522059026F00306941 /* ChartShowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartShowView.swift; sourceTree = "<group>"; };
+		DB90FE54205919D300306941 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../Charts-draw-gradient-line/Charts.xcodeproj"; sourceTree = "<group>"; };
 		E29AA4C8E14448C7997E9FE7 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		E6F55AF91B7F467B8A603171 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -380,6 +433,7 @@
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
+				DB90FE5D205919E700306941 /* Charts.framework in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				0C97EECD6F444C63ACB289F7 /* libRNVectorIcons.a in Frameworks */,
 			);
@@ -509,6 +563,7 @@
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
+				DB90FE2F2058C51500306941 /* React */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -656,6 +711,34 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		DB90FE2F2058C51500306941 /* React */ = {
+			isa = PBXGroup;
+			children = (
+				DB90FE54205919D300306941 /* Charts.xcodeproj */,
+				DB90FE402058C61900306941 /* ChartDataSet.h */,
+				DB90FE412058C61900306941 /* ChartDataSet.m */,
+				DB90FE522059026F00306941 /* ChartShowView.swift */,
+				DB90FE432058C64500306941 /* ChartShowViewManager.h */,
+				DB90FE442058C64500306941 /* ChartShowViewManager.m */,
+				DB90FE462058C67E00306941 /* AppParamsManager.h */,
+				DB90FE472058C67E00306941 /* AppParamsManager.m */,
+				DB90FE4A2058FB0400306941 /* RCTConvert+Charts.h */,
+				DB90FE4B2058FB0400306941 /* RCTConvert+Charts.m */,
+				DB90FE4F2059019800306941 /* SmartSpaceR-Bridging-Header.h */,
+			);
+			name = React;
+			path = SmartSpaceR/React;
+			sourceTree = "<group>";
+		};
+		DB90FE55205919D300306941 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DB90FE5A205919D300306941 /* Charts.framework */,
+				DB90FE5C205919D300306941 /* ChartsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -685,10 +768,12 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				DB90FE3D2058C57E00306941 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DB90FE60205919E700306941 /* PBXTargetDependency */,
 			);
 			name = SmartSpaceR;
 			productName = "Hello World";
@@ -746,6 +831,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 6HC4YDL8W4;
+						LastSwiftMigration = 0920;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -770,6 +856,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = DB90FE55205919D300306941 /* Products */;
+					ProjectRef = DB90FE54205919D300306941 /* Charts.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -1058,6 +1148,20 @@
 			remoteRef = DB8A44E52047B6540064678F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		DB90FE5A205919D300306941 /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = DB90FE59205919D300306941 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DB90FE5C205919D300306941 /* ChartsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ChartsTests.xctest;
+			remoteRef = DB90FE5B205919D300306941 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1162,6 +1266,11 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				DB90FE4C2058FB0400306941 /* RCTConvert+Charts.m in Sources */,
+				DB90FE532059026F00306941 /* ChartShowView.swift in Sources */,
+				DB90FE452058C64500306941 /* ChartShowViewManager.m in Sources */,
+				DB90FE422058C61900306941 /* ChartDataSet.m in Sources */,
+				DB90FE482058C67E00306941 /* AppParamsManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1195,6 +1304,11 @@
 			target = 2D02E47A1E0B4A5D006451C7 /* SmartSpaceR-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
+		DB90FE60205919E700306941 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Charts;
+			targetProxy = DB90FE5F205919E700306941 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1213,6 +1327,7 @@
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1237,6 +1352,7 @@
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = SmartSpaceRTests/Info.plist;
@@ -1258,7 +1374,9 @@
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 6HC4YDL8W4;
@@ -1270,6 +1388,9 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = SmartSpaceR;
+				SWIFT_OBJC_BRIDGING_HEADER = "SmartSpaceR/React/SmartSpaceR-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1277,7 +1398,9 @@
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6HC4YDL8W4;
 				INFOPLIST_FILE = SmartSpaceR/Info.plist;
@@ -1288,6 +1411,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = SmartSpaceR;
+				SWIFT_OBJC_BRIDGING_HEADER = "SmartSpaceR/React/SmartSpaceR-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

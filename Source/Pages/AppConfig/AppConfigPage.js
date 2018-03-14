@@ -36,7 +36,7 @@ export default class AppConfigPage extends PureComponent{
         super(props);
         this.state = {user:{}};
     }
-    componentDidMount(){
+    componentWillMount(){
         UserInfoManager.userSubject.subscribe((user)=>{
             this.setState({user:user})
         });
