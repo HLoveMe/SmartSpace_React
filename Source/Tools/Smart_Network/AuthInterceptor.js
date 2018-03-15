@@ -10,7 +10,7 @@ import { UserInfo,UserInfoManager } from "../../Pages/Account/UserInfoManager"
 
 class _AutoAuthorization extends  Interceptor{
     user = null;
-    _Authorization = "朱子豪";
+    _Authorization = "ABCD";
     /** 使用 初始化 */
     constructor(ops){
         super(ops);

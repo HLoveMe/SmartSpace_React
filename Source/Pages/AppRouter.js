@@ -173,7 +173,9 @@ export const APPTabNavRouter = TabNavigator({
 
             </TabBarBottom>
         )
-    }
+    },
+    tabBarPosition:"bottom",
+    swipeEnabled:false,
 });
 
 

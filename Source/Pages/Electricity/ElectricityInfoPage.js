@@ -36,7 +36,6 @@ export default class ElectricityInfoPage extends Component{
     componentWillMount(){
         ElectricityBoxMananger.currentSubject.subscribe((device)=>{
             this.setState({device})
-            debugger
         })
     }
     render(){

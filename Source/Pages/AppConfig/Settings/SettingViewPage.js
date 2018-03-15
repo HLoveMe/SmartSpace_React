@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react';
-import { StyleSheet, View,Image ,TouchableOpacity,Text,FlatList,AlertIOS} from 'react-native';
+import { StyleSheet, View,Image ,TouchableOpacity,Text,FlatList,AlertIOS,Platform} from 'react-native';
 import { NativeModules,NativeEventEmitter} from 'react-native';
 const { AppParamsManager } = NativeModules;
 import Button from 'apsl-react-native-button'
@@ -54,8 +54,13 @@ export  default class SettingViewPage extends React.PureComponent{
     }
     constructor(ops){
         super(ops);
-        console.log(NativeModules);
-        let version = AppParamsManager["CFBundleShortVersionString"];
+        let version = "0.0.0"
+        if(Platform.OS == "android"){
+            version = AppParamsManager["CFBundleShortVersionString"];
+        }else{
+            version = "安卓不知道"
+        }
+
         this.list = [
             {
                 name:"修改密码",

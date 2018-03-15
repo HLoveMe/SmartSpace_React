@@ -16,8 +16,6 @@ import {
 } from 'react-native';
 import { UserInfoManager } from "./Source/Pages/Account/UserInfoManager";
 import { APPLoginRouter,APPTabNavRouter } from "./Source/Pages/AppRouter"
-import ElectricityBoxManager from "./Source/Pages/Group/ElectricityBoxManager"
-import MainDataManager from "./Source/Pages/Home/MainDataManager"
 import {initStorage} from "./Source/Tools/DataBase"
 import {InterceptorManager} from "./Source/Tools/NetWork/Interceptor"
 import {AutoAuthorization} from "./Source/Tools/Smart_Network/AuthInterceptor"
@@ -29,13 +27,12 @@ import RootSaga from "./Source/Sagas/sagas"
 import { Provider } from 'react-redux'
 import watch from 'redux-watch'
 import {Types} from "./Source/ReduxReact/AppTypes"
-import LoadingSpinnerOverlay from 'react-native-smart-loading-spinner-overlay'
-import Toast, {DURATION} from 'react-native-easy-toast'
-class BlankPage extends Component{render() {return (<View></View>)}}
+import Toast from "teaset/components/Toast/Toast"
+
+class BlankPage extends Component{render() {return (<View style={{flex:1,backgroundColor:"white"}}></View>)}}
 export default class SmartSpaceR extends Component {
-    partModalLoadingSpinnerOverLay = null;
-    toast = null;
     user = null;
+    static ToastKey = null;
     constructor(props) {
         super(props);
         this.state = {page:BlankPage};
@@ -84,27 +81,35 @@ export default class SmartSpaceR extends Component {
             }
             last = newD;
             content = _new.content;
-            this.partModalLoadingSpinnerOverLay.hide({delay:0,duration:0});
-            this.toast.close();
+            if(SmartSpaceR.ToastKey){
+                //隐藏之前的
+                Toast.hide(SmartSpaceR.ToastKey);
+                SmartSpaceR.ToastKey = null;
+            }
             switch (_new.type){
                 case Types.MessageType.loadingMessage:
                     //显示菊花
-                    this.partModalLoadingSpinnerOverLay.show({
-                        delay:0,
-                        ..._new,
-                        duration:(_new.duration == -1 || _new.duration == null) ? 255 : _new.duration
+                    SmartSpaceR.ToastKey = Toast.show({
+                        icon: (
+                            <View style={{paddingHorizontal:15,paddingVertical:10}}>
+                                <ActivityIndicator size='large' color={'#ddd'} />
+                            </View>
+                        ),
+                        position: 'center',
+                        duration: 1000000,
                     });
                     break;
                 case Types.MessageType.textMessage:
-                    this.toast.show(_new.content,_new.duration == -1 ? DURATION.FOREVER : _new.duration * 1000);
+                    // this.toast.show(_new.content,_new.duration == -1 ? DURATION.FOREVER : _new.duration * 1000);
+                    SmartSpaceR.ToastKey = Toast.message(_new.content,_new.duration == -1 ? 255000 : _new.duration * 1000)
                     break;
                 case Types.MessageType.loadTextMessage:
                     //显示菊花和文字
-                    //暂时不显示文字
-                    this.partModalLoadingSpinnerOverLay.show({
-                        delay:0,
-                        ..._new,
-                        duration:255
+                    SmartSpaceR.ToastKey = Toast.show({
+                        text: _new.content,
+                        icon: <ActivityIndicator size='large' color={'#ddd'} />,
+                        position: 'center',
+                        duration: 1000000,
                     });
                     break;
                 default:
@@ -114,8 +119,13 @@ export default class SmartSpaceR extends Component {
         //
         Store.subscribe(watch(Store.getState,"MessageReducer.hiddenMessageInfo")((_new,old,path)=>{
             console.log("移除提示框",_new);
-            this.partModalLoadingSpinnerOverLay.hide({delay:0,duration:0});
-            this.toast.close();
+            if(SmartSpaceR.ToastKey == null){return}
+            Toast.hide(SmartSpaceR.ToastKey);
+            SmartSpaceR.ToastKey = null;
+            // console.log(this.partModalLoadingSpinnerOverLay)
+            // debugger
+            // this.partModalLoadingSpinnerOverLay.hide({delay:0,duration:0});
+            // this.toast.close();
         }))
     }
     //配置数据请求
@@ -144,12 +154,6 @@ export default class SmartSpaceR extends Component {
                         console.log("进行导航")
                     }}>
                     </this.state.page>
-                    <LoadingSpinnerOverlay
-                        ref={ component => this.partModalLoadingSpinnerOverLay = component }
-                        modal={true}
-                        marginTop={64}/>
-                    <Toast ref={(toast)=>this.toast = toast}/>
-
                 </View>
             </Provider>
         )
@@ -162,3 +166,12 @@ AppRegistry.registerComponent('SmartSpaceR', () => App);
 
 
 
+
+/**
+ * <LoadingSpinnerOverlay
+ ref={ component => this.partModalLoadingSpinnerOverLay = component }
+ modal={true}
+ marginTop={64}/>
+ <Toast ref={(toast)=>this.toast = toast}/>
+ *
+ * */

@@ -12,6 +12,7 @@ import {USerInfoView} from "./views/USerInfoView"
 import {UserInfoManager} from "../Account/UserInfoManager"
 import ItemCell from 'react-native-item-cell'
 import {colors} from "../../Tools/colors"
+import Toast from "teaset/components/Toast/Toast"
 const styles = StyleSheet.create({
    container:{
        flex:1,
@@ -42,6 +43,7 @@ export default class AppConfigPage extends PureComponent{
         });
     }
     _onPress = (index)=>{
+        Toast.message("ASSAS")
         switch (index){
             case 0:
                 break
