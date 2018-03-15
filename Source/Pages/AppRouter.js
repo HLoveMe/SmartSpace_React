@@ -118,6 +118,9 @@ export const APPTabNavRouter = TabNavigator({
                 navigationOptions:{
                     headerLeft:null
                 }
+            },
+            deviceEX:{
+                getScreen:()=>{return require("./Electricity/DefaultDeviceChange").default}
             }
         },{
             navigationOptions:{

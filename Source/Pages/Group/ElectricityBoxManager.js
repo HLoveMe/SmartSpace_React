@@ -18,6 +18,7 @@ class _ElectricityBoxMananger {
     constructor() {
         //配电箱首页数据
         Store.subscribe(watch(Store.getState,"GroupReducer.devideBox")((_new)=>{
+            debugger
             this.info = _new;
             this.infoSubject.next(_new);
             this.currentSubject.next(_new.equipments.filter((V)=>{
