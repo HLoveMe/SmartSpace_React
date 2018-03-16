@@ -9,6 +9,18 @@
 * ./Source/Saga     saga 为redux-saga
 
 
-* Dome-Run
+* Dome-Run-iOS
 
 	![](./dome.gif)
+	
+* Dome-Run-Android
+
+    
+    
+* 说明
+    * 该应用支持iOS/Android
+    * 图表控制需要原生支持
+        * iOS (Charts)
+        * Android (MPAndroidChart)  不会安卓
+        
+    

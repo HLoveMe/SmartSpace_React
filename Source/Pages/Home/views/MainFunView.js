@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import {
     StyleSheet,
     Text,
-    View,Image
+    View,Image,TouchableOpacity
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {colors} from "../../../Tools/colors"
@@ -62,13 +62,6 @@ export class MainFunView extends  Component{
     constructor(props) {
         super(props);
     }
-    _renderItems = ()=>{
-        this.infos.map((group)=>{
-           return group.map((one)=>{
-               return
-           })
-        });
-    }
     render(){
         return (
             <View style={[MainFunStyle.container,{height:this.props.height}]}>
@@ -81,12 +74,16 @@ export class MainFunView extends  Component{
                                     {
                                         group.map((one,a)=>{
                                             return (
-                                                <View style={MainFunStyle.contentPart} key={a}>
+                                                <TouchableOpacity style={MainFunStyle.contentPart} key={a} activeOpacity={0.9}
+                                                                  onPress = {()=>{
+                                                                      this.props.CellClick && this.props.CellClick(index * 3 + a);
+                                                                  }}
+                                                >
                                                     <View style={MainFunStyle.PartTop}>
                                                         <Image style={MainFunStyle.PartImage} source={one.icon}></Image>
                                                     </View>
                                                     <Text style={MainFunStyle.PartBottom}>{one.name}</Text>
-                                                </View>
+                                                </TouchableOpacity>
                                             )
                                         })
                                     }
@@ -101,5 +98,6 @@ export class MainFunView extends  Component{
 
 }
 MainFunView.propTypes = {
-    height:PropTypes.number.isRequired
+    height:PropTypes.number.isRequired,
+    CellClick:PropTypes.func.isRequired
 }

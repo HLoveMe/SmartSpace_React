@@ -43,7 +43,6 @@ export default class AppConfigPage extends PureComponent{
         });
     }
     _onPress = (index)=>{
-        Toast.message("ASSAS")
         switch (index){
             case 0:
                 break

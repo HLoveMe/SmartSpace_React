@@ -61,63 +61,36 @@ export default class HomeFunPage extends Component{
             })
         })
     };
+    _CellClick = (index)=>{
+        switch (index){
+            case 0:
+                //开关控制
+                this.props.navigation.navigate("switch_all_device");
+                break
+            case 1:
+                break
+            case 2:
+                break
+            case 3:
+                break
+            case 4:
+                break
+            case 5:
+                break
+            default:
+                break
+        }
+    }
     render(){
         return (
             <View style={styles.page}>
                 <ElectricityDistributionView data = {this.state.data} style={styles.distribution} height={PXHandle.PXHeight(359)}>
 
                 </ElectricityDistributionView>
-                <MainFunView height={PXHandle.PXHeight(195)}>
+                <MainFunView height={PXHandle.PXHeight(195)} CellClick={this._CellClick}>
 
                 </MainFunView>
             </View>
         )
     }
 }
-
-/**
- *
- history
- :
- (24) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
- id
- :
- 6
- is_primary
- :
- 1
- meter_fee
- :
- {peak: {…}, normal: {…}, valley: {…}}
- name
- :
- "MT419B5B56"
- price
- :
- 2
- serial_number
- :
- "MT419B5B56"
- status
- :
- {power: 0, temp: 28, meterd: 0.000203, leakage: 0, meterm: 0.000203, …}
- today_fee
- :
- 0
- yesterday_fee
- :
- 0
- * */
-
-/**
- * equipment_id
- :
- 6
- is_default
- :
- 1
- name
- :
- "设备6"
- *
- * */

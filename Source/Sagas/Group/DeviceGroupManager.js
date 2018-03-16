@@ -139,7 +139,7 @@ export function *DeviceGroupOperation() {
                     yield put({
                         type:Types.MessageType.textMessage,
                         content:result.success ? "创建成功" : "创建失败"
-                    })
+                    });
                     yield put({
                         type:Types.GroupType.createGroup,
                         createGroupResult:{

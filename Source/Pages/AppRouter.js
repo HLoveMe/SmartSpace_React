@@ -63,6 +63,15 @@ export const APPTabNavRouter = TabNavigator({
                 navigationOptions:{
                     headerLeft:null
                 }
+            },
+            switch_all_device:{
+                getScreen:()=>{return require("./Home/pages/switch/SwitchBoxGroupPage").default}
+            },
+            all_devide_group:{
+                getScreen:()=>{return require("./Home/pages/switch/SwitchGroupPage").default}
+            },
+            group_switch_control:{
+                getScreen:()=>{return require("./Home/pages/switch/SwitchGroupDetailPage").default}
             }
         },{
             navigationOptions:{

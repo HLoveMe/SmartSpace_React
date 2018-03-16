@@ -31,3 +31,40 @@ export function * MainDataManagerFunction() {
         }
     }
 }
+
+
+export function *SwitchControl() {
+    while (true){
+        let action = yield take([Types.HomeTypes.SwitchGetGroupDetail,Types.HomeTypes.SwitchGroupChange]);
+        switch (action.type){
+            case Types.HomeTypes.SwitchGetGroupDetail:
+                try {
+                    yield put({
+                        ...action,
+                        type:Types.GroupType.oneGroupDetail
+                    })
+                }catch (err){
+                    console.log("转发给Types.GroupType.oneGroupDetail失败",err)
+                }
+                break
+            case  Types.HomeTypes.SwitchGroupChange:
+                try{
+                    let result = yield NetWorkManager.POST("group/change-status",{id:action.id,status:action.status ? 1 : 0}).toPromise()
+                    console.log(result,190,action)
+                    yield put({
+                        type:Types.MessageType.textMessage,
+                        content:result.success ? "修改成功" : "修改失败"
+                    })
+                    if(!result.success){
+                        yield  put({
+                            type:Types.HomeTypes.SwitchGroupChangeResult,
+                            GroupSwitchResult:{/***不需要传递数据*/}
+                        })
+                    }
+                }catch (err){
+                    console.log("修改组 开关状态失败",err);
+                }
+                break
+        }
+    }
+}

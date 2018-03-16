@@ -56,9 +56,9 @@ export  default class SettingViewPage extends React.PureComponent{
         super(ops);
         let version = "0.0.0"
         if(Platform.OS == "android"){
-            version = AppParamsManager["CFBundleShortVersionString"];
-        }else{
             version = "安卓不知道"
+        }else{
+            version = AppParamsManager["CFBundleShortVersionString"];
         }
 
         this.list = [
