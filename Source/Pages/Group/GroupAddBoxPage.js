@@ -10,10 +10,7 @@ import {
 import {Types} from "../../ReduxReact/AppTypes"
 import PXHandle from "../../Tools/PXHandle"
 import {colors} from "../../Tools/colors"
-// import watch from 'redux-watch'
-// import Store from "../../ReduxReact/APPReducers"
-import ItemCell from 'react-native-item-cell'
-import ElectricityBoxManager from "./ElectricityBoxManager"
+
 import CheckBox from 'react-native-checkbox';
 export default class GroupAddBoxPage extends Component{
     selects = [false,false,false];

@@ -14,7 +14,6 @@ import {MainFunView} from "./views/MainFunView"
 import Store from "../../ReduxReact/APPReducers"
 import {Types} from "../../ReduxReact/AppTypes"
 import MainDataManager from "./MainDataManager"
-import ElectricityBoxManager from "../Group/ElectricityBoxManager"
 import {MainElectryInfo} from "./models/MainElectryInfo"
 import {Observable} from "rxjs/Rx"
 const styles = StyleSheet.create({

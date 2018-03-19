@@ -69,7 +69,23 @@ class _ElectrictyBoxView extends Component{
         super(props);
     }
     _exchangeDefaultDevice = ()=>{
-        console.log("wqwq",this.props)
+        if(this.props.device != null){
+            this.props.navigation.navigate("deviceEX",{id:this.props.device.equipment_id})
+        }
+    }
+    _getPrice = ()=>{
+        info = this.props.main;
+        if(info != null && info.status != null){
+            return info.status.meterm * info.price;
+        }
+        return "0"
+    }
+    _getEleNumber = ()=>{
+        info = this.props.main;
+        if(info != null && info.status != null){
+            return info.status.meterm;
+        }
+        return "0"
     }
     render(){
         return  (
@@ -80,19 +96,29 @@ class _ElectrictyBoxView extends Component{
                     </Text>
                     <View style={styles.change}>
                         <Text style={{color:"blue",paddingHorizontal:10,
-                            width:40}} onPress={this._exchangeDefaultDevice}>AA</Text>
+                            width:60}} onPress={this._exchangeDefaultDevice}>
+                            更改
+                        </Text>
                     </View>
                 </View>
                 <View style={{flexDirection:"row",marginTop:40}}>
                     <View style={[styles.ele]}>
                         <View style={styles.eleNum}>
-                            <Text style={styles.eleNumC}>AA</Text>
+                            <Text style={styles.eleNumC}>
+                                {
+                                    this._getPrice()
+                                }
+                            </Text>
                         </View>
                         <Text style={styles.eleText}>电费(¥)</Text>
                     </View>
                     <View style={[styles.ele]}>
                         <View style={styles.eleNum}>
-                            <Text style={styles.eleNumC}>AA</Text>
+                            <Text style={styles.eleNumC}>
+                                {
+                                    this._getEleNumber()
+                                }
+                            </Text>
                         </View>
                         <Text style={styles.eleText}>用电量(KW.h)</Text>
                     </View>
@@ -104,7 +130,7 @@ class _ElectrictyBoxView extends Component{
 }
 
 const mapStateToProps =(state,props)=>{
-    return {...props,device:props.device || {}}
+    return {...props,device:props.device || {} , main:props.main || {}}
 };
 
 export default ElectrictyBoxView = withNavigation(connect(mapStateToProps)(_ElectrictyBoxView))

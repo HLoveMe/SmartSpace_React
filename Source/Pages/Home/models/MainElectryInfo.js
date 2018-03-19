@@ -92,7 +92,8 @@ export  class MainElectryInfo{
                 this.lostElectric = 0.0
             }else{
                 this.pressure = data.status.voltage.first || 220.0;
-                this.electric = data.status.current.first || 0.0
+                //this.electric = data.status.current.first || 0.0
+                this.electric = data.status.power || 0.0
                 this.temperature = data.status.temp;
                 this.lostElectric = data.status.leakage;
                 this.price = data.price;
