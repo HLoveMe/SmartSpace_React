@@ -75,8 +75,11 @@ export const APPTabNavRouter = TabNavigator({
             },
             bugs_message:{
                 getScreen:()=>{return require("./Home/pages/bugs/BugsMessagePage").default}
+            },
+            //系统消息
+            systemMgs:{
+                getScreen:()=>{return require("./Home/pages/system/SystemMessagePage").default}
             }
-
         },{
             navigationOptions:{
                 tabBarIcon:(options)=>{

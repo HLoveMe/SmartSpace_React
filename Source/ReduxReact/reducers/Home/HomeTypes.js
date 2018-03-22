@@ -10,4 +10,6 @@ export const HomeTypes = {
     SwitchGroupChangeResult:"SwitchGroupChangeResult",//"状态修改结果"
     //故障修复
     BugMessages:"BugMessages",
+    //系统消息
+    SystemMessages:"SystemMessages",
 };

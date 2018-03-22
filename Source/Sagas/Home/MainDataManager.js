@@ -97,3 +97,34 @@ export function * BugMessagesFunction() {
         }
     }
 }
+
+
+export function * SystemsMessagesFunction() {
+    while (true){
+        let action = yield take(Types.HomeTypes.SystemMessages);
+        switch (action.type){
+            case Types.HomeTypes.SystemMessages:
+                try {
+                    if(action.Messages == null){
+                        console.log("SystemMessages")
+                        yield put({
+                            type:Types.MessageType.loadingMessage
+                        })
+                        let result = yield  NetWorkManager.GET("message/system-message",null,{rows:action.row,page:action.index}).toPromise()
+                        console.log(result)
+                        yield put({
+                            type:Types.MessageType.MessageDismiss
+                        });
+                        yield put({
+                            type:Types.HomeTypes.SystemMessages,
+                            Messages:result.success ? result.result :{}
+                        });
+                    }
+                }catch (err){
+                    console.log("加载SystemMessages失败",err)
+                }
+            default:
+                break
+        }
+    }
+}

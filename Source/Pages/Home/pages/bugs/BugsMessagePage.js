@@ -11,8 +11,8 @@ import PXHandle from "../../../../Tools/PXHandle"
 import {colors} from "../../../../Tools/colors"
 import Store from "../../../../ReduxReact/APPReducers"
 import watch from 'redux-watch'
-import RefreshListView,{RefreshState} from "react-native-refresh-list-view"
 import Types  from "../../../../ReduxReact/AppTypes"
+import RefreshListView,{RefreshState} from "react-native-refresh-list-view"
 const styles = StyleSheet.create({
     container:{
         backgroundColor:"white",

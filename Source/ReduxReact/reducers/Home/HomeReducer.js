@@ -24,16 +24,24 @@ function BugsMessageReducer(state={},action) {
     return state
 }
 
+function SystemMessagesReducer(state={},action) {
+    switch (action.type){
+        default:
+            return {...state,...action}
+    }
+    return state
+}
 
 
 export function  HomeReducer(state = {},action) {
     let SwitchControl = SwitchControlReducer(state.SwitchControl,action);
     let BugMessages = BugsMessageReducer(state.BugMessages,action);
+    let SystemMessages = SystemMessagesReducer(state.SystemMessages,action);
     switch (action.type){
         case HomeTypes.MainDataUpdate:
-            return {...state,...action,SwitchControl,BugMessages};
+            return {...state,...action,SwitchControl,BugMessages,SystemMessages};
         default:
-            return {...state,SwitchControl,BugMessages};
+            return {...state,SwitchControl,BugMessages,SystemMessages};
     }
-    return {...state,SwitchControl,BugMessages}
+    return {...state,SwitchControl,BugMessages,SystemMessages}
 }
