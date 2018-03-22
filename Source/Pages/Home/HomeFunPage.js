@@ -71,6 +71,7 @@ export default class HomeFunPage extends Component{
             case 2:
                 break
             case 3:
+                this.props.navigation.navigate("bugs_message");
                 break
             case 4:
                 break

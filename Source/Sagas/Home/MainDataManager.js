@@ -5,7 +5,6 @@
 
 import {NetWorkManager} from "../../Tools/NetWork/NetWorkManager"
 import {Types} from "../../ReduxReact/AppTypes"
-
 import { fork,put,take } from 'redux-saga/effects';
 
 function *updateMainData() {
@@ -64,6 +63,36 @@ export function *SwitchControl() {
                 }catch (err){
                     console.log("修改组 开关状态失败",err);
                 }
+                break
+        }
+    }
+}
+
+export function * BugMessagesFunction() {
+    while (true){
+        let action = yield take(Types.HomeTypes.BugMessages);
+        switch (action.type){
+            case Types.HomeTypes.BugMessages:
+                try {
+                    if(action.Messages == null){
+                        console.log("BugMessages")
+                        yield put({
+                            type:Types.MessageType.loadingMessage
+                        })
+                        let result = yield  NetWorkManager.GET("message/fault-list",null,{rows:action.row,page:action.index}).toPromise()
+                        console.log(result)
+                        yield put({
+                            type:Types.MessageType.MessageDismiss
+                        });
+                        yield put({
+                            type:Types.HomeTypes.BugMessages,
+                            Messages:result.success ? result.result :{}
+                        });
+                    }
+                }catch (err){
+                    console.log("加载BugMessages失败",err)
+                }
+            default:
                 break
         }
     }

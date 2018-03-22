@@ -72,7 +72,11 @@ export const APPTabNavRouter = TabNavigator({
             },
             group_switch_control:{
                 getScreen:()=>{return require("./Home/pages/switch/SwitchGroupDetailPage").default}
+            },
+            bugs_message:{
+                getScreen:()=>{return require("./Home/pages/bugs/BugsMessagePage").default}
             }
+
         },{
             navigationOptions:{
                 tabBarIcon:(options)=>{
