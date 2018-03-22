@@ -79,6 +79,10 @@ export const APPTabNavRouter = TabNavigator({
             //系统消息
             systemMgs:{
                 getScreen:()=>{return require("./Home/pages/system/SystemMessagePage").default}
+            },
+            //系统消息处理
+            systemDetail:{
+                getScreen:()=>{return require("./Home/pages/system/SystemMessageDetailPage").default}
             }
         },{
             navigationOptions:{

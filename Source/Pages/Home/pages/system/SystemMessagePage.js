@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import {
     StyleSheet,
     Text,
-    View,Image,TouchableOpacity
+    View,Image,TouchableOpacity,
 } from 'react-native';
 import PXHandle from "../../../../Tools/PXHandle"
 import {colors} from "../../../../Tools/colors"
@@ -88,24 +88,33 @@ export default class SystemMessagePage extends Component{
     }
     _rendItem = ({item,index})=>{
         return (
-            <View style={styles.cell}>
+            <TouchableOpacity style={styles.cell}
+                              onPress = {()=>{
+                                  this.props.navigation.navigate("systemDetail",{msg:item,update:this._updateList})
+                              }}
+            >
                 <View style={styles.left}>
                     <Image source={this._rendItemImage(item,index)}></Image>
                 </View>
                 <View style={styles.right}>
-                    <Text style={{fontSize:17,marginTop:10}}>ABCD</Text>
-                    <Text style={{paddingRight:10}} numberOfLines={1}>{item.desc}</Text>
+                    <Text style={{fontSize:17,marginTop:10}}>{item.title}</Text>
+                    <Text style={{paddingRight:10,marginTop:5,fontSize:12}} numberOfLines={1}>{item.subtitle}</Text>
                     {
                         this._rendStateImage(item,index)
                     }
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
     _renderSeparator = ()=>{
         return (
             <View style={styles.Separator}></View>
         )
+    }
+    _updateList = ()=>{
+        this.setState({
+            dataList:[].concat(this.state.dataList)
+        })
     }
     componentWillMount(){
         Store.dispatch({type:Types.HomeTypes.SystemMessages,index:1,row:this.state.row});
@@ -121,6 +130,16 @@ export default class SystemMessagePage extends Component{
             this.setState({index, dataList, refreshState})
         }))
 
+    }
+    _loadNewData = ()=>{}
+    _loadMoreData=()=>{
+        console.log("加载更多数据")
+        this.setState({refreshState:RefreshState.FooterRefreshing})
+        Store.dispatch({
+            type:Types.HomeReducer.SystemMessages,
+            index:this.state.index,
+            row:this.state.row
+        })
     }
     render(){
         return (

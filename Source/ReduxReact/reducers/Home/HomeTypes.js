@@ -12,4 +12,5 @@ export const HomeTypes = {
     BugMessages:"BugMessages",
     //系统消息
     SystemMessages:"SystemMessages",
+    SystemOperation:"SystemOperation"
 };

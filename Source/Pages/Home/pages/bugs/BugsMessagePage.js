@@ -141,7 +141,7 @@ export default class BugsMessagePage extends Component{
         console.log("加载更多数据")
         this.setState({refreshState:RefreshState.FooterRefreshing})
         Store.dispatch({
-            type:Types.HomeReducer.Messages,
+            type:Types.HomeReducer.BugMessages,
             index:this.state.index,
             row:this.state.row
         })
